@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 
 int main(int argc, char** argv) {
 	if (argc != 4) {
@@ -13,4 +13,4 @@ int main(int argc, char** argv) {
 
 
 	return 0;
-}
+}  */
