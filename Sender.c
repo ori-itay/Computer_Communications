@@ -7,7 +7,7 @@
 int main(int argc, char** argv) {
 
 	Init_Winsock();
-
+	//test
 	char send_buff[SEND_BUFF];
 	char read_buff[READ_BUFF];
 	unsigned int serv_port = -1, totalsent = -1, num_sent = -1, num_read = -1, notwritten = -1, not_been_read = -1;
