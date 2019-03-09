@@ -4,6 +4,8 @@
 #define SEND_BUFF 57
 #define READ_BUFF 49
 
+#define MIN(x, y) (((x) < (y)) ? (x) : (y)) //from:   https://stackoverflow.com/questions/3437404/min-and-max-in-c
+
 int main(int argc, char** argv) {
 
 	Init_Winsock();
