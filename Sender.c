@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include "winsock2.h" 
 
-#define SEND_BUFF 57
+#define R_C_BUFF 64
 #define READ_BUFF 49
+#define BYTE_SIZE 8
 
 #define MIN(x, y) (((x) < (y)) ? (x) : (y)) //from:   https://stackoverflow.com/questions/3437404/min-and-max-in-c
 
 int main(int argc, char** argv) {
 
 	Init_Winsock();
-	//test
-	char send_buff[SEND_BUFF];
-	char read_buff[READ_BUFF];
-	unsigned int serv_port = -1, totalsent = -1, num_sent = -1, num_read = -1, notwritten = -1, not_been_read = -1;
-	int sockfd = -1, input_file_size = 0;
+
+	char s_c_buff_1[R_C_BUFF], s_c_buff_2[R_C_BUFF], file_read_buff[READ_BUFF];
+	unsigned int chnl_port = -1, totalsent = -1, num_sent = -1, num_read = -1, notwritten = -1, not_been_read = -1;
+	int s_c_fd = -1, input_file_size = 0;
 	FILE *fp;
 
 	if (argc != 4) {
@@ -29,35 +29,35 @@ int main(int argc, char** argv) {
 	input_file_size = get_file_size(file_name);
 
 
-	if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+	//sender - channel socket
+	if ((s_c_fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
 		fprintf(stderr, "%s\n", strerror(errno));
 		exit(1);
 	}
-
-	serv_port = (unsigned int)strtoul(port, NULL, 10); //get server's port number
-	struct sockaddr_in serv_addr;
-	memset(&serv_addr, 0, sizeof(serv_addr));
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port = htons(serv_port); // htons for endiannes
-	serv_addr.sin_addr.s_addr = inet_addr(ip);
+	chnl_port = (unsigned int)strtoul(port, NULL, 10); //get channel's port number
+	struct sockaddr_in cnl_addr;
+	memset(&cnl_addr, 0, sizeof(cnl_addr));
+	cnl_addr.sin_family = AF_INET;
+	cnl_addr.sin_port = htons(chnl_port); 
+	cnl_addr.sin_addr.s_addr = inet_addr(ip);
 
 	not_been_read = input_file_size;
 	while (not_been_read > 0) {
-		memset(read_buff, 0, READ_BUFF);
-		num_read = read(fp, read_buff, MIN(READ_BUFF, not_been_read));
+		memset(file_read_buff, 0, READ_BUFF);
+		num_read = read(fp, file_read_buff, MIN(READ_BUFF, not_been_read));
 		if (num_read <= 0) {
 			fprintf(stderr, "Error reading fron file. exiting...\n");
 			exit(1);
 		}
 		not_been_read -= num_read;
-		compute_block(read_buff, send_buff);
+		compute_block(file_read_buff, s_c_buff_1);
 
 		notwritten = num_read; //curr num of bytes to write
 		totalsent = 0;
 		// keep looping until nothing left to write for this BUFF size block
 		while (notwritten > 0) {
 			// notwritten = how much left to write ; totalsent = how much written so far ; num_sent = how much written in last write() call
-			num_sent = sendto(sockfd, send_buff + totalsent, notwritten, 0, &serv_addr, sizeof(serv_addr));
+			num_sent = sendto(s_c_fd, s_c_buff_1 + totalsent, notwritten, 0, &cnl_addr, sizeof(cnl_addr));
 			if (num_sent == -1) {// check if error occured (server closed connection?)
 				fprintf(stderr, "%s\n", strerror(errno));
 				exit(1);
@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
 	if (fclose(fp) != 0) {
 		fprintf(stderr, "%s\n", strerror(errno));
 	}
-	if (closesocket(sockfd) != 0) {
+	if (closesocket(s_c_fd) != 0) {
 		fprintf(stderr, "%s\n", strerror(errno));
 	}
 	return 0;
@@ -100,9 +100,35 @@ int get_file_size(FILE *fp) {
 	return size;
 }
 
-void compute_block(char read_buff[READ_BUFF], char send_buff[SEND_BUFF]) {
+void compute_block(char read_buff[READ_BUFF], char s_c_buff_1[R_C_BUFF]) {
 
+	int bit_ind, read_ind, write_ind, xor = 0, bit_pos, i, j;
+	char curr_bit;
 
+	memset(s_c_buff_1, 0, R_C_BUFF);
+	for (bit_ind = 0; bit_ind < READ_BUFF*BYTE_SIZE; bit_ind++) {
+		read_ind = bit_ind / 8;
+		write_ind = bit_ind / 7;
+		bit_pos = bit_ind % 7;
+
+		curr_bit = (read_buff[read_ind] & (pow(2, bit_pos)) ) != 0 ; // 1 if result after mask is different from 0. otherwise - 0.
+		s_c_buff_1[write_ind] = (curr_bit<<(7-bit_pos)) | s_c_buff_1[write_ind];
+		xor ^= curr_bit;
+
+		if (bit_ind % 7 == 0) {
+			//store parity
+			s_c_buff_1[write_ind] = xor | s_c_buff_1[write_ind];
+			xor = 0;
+		}
+	}
+
+	for (i = 0; i < 8; i++) {
+		xor = 0;
+		for (j = 0; j < 8; j++) {
+			xor ^= s_c_buff_1[j + i];
+		}
+		s_c_buff_1[56 + i] = xor;
+	}
 
 	return;
 }
