@@ -5,7 +5,6 @@
 #define READ_BUFF 49
 #define BYTE_SIZE 8
 
-#define MIN(x, y) (((x) < (y)) ? (x) : (y)) //from:   https://stackoverflow.com/questions/3437404/min-and-max-in-c
 
 int main(int argc, char** argv) {
 
@@ -41,10 +40,12 @@ int main(int argc, char** argv) {
 	cnl_addr.sin_port = htons(chnl_port); 
 	cnl_addr.sin_addr.s_addr = inet_addr(ip);
 
+
+
 	not_been_read = input_file_size;
 	while (not_been_read > 0) {
 		memset(file_read_buff, 0, READ_BUFF);
-		num_read = read(fp, file_read_buff, MIN(READ_BUFF, not_been_read));
+		num_read = read(fp, file_read_buff, READ_BUFF);
 		if (num_read <= 0) {
 			fprintf(stderr, "Error reading fron file. exiting...\n");
 			exit(1);
@@ -89,7 +90,6 @@ void Init_Winsock() {
 
 
 
-//based on code from https://stackoverflow.com/questions/238603/how-can-i-get-a-files-size-in-c
 int get_file_size(FILE *fp) {
 	int size = 0;
 
@@ -101,6 +101,7 @@ int get_file_size(FILE *fp) {
 }
 
 void compute_block(char read_buff[READ_BUFF], char s_c_buff_1[R_C_BUFF]) {
+
 
 	int bit_ind, read_ind, write_ind, xor = 0, bit_pos, i, j;
 	char curr_bit;
@@ -122,12 +123,8 @@ void compute_block(char read_buff[READ_BUFF], char s_c_buff_1[R_C_BUFF]) {
 		}
 	}
 
-	for (i = 0; i < 8; i++) {
-		xor = 0;
-		for (j = 0; j < 8; j++) {
-			xor ^= s_c_buff_1[j + i];
-		}
-		s_c_buff_1[56 + i] = xor;
+	for (i = 0; i < 7; i++) {
+		s_c_buff_1[7] ^= s_c_buff_1[i];
 	}
 
 	return;
