@@ -1,5 +1,62 @@
 ﻿  Channel.c
+c:\users\ori\source\repos\cc\channel.c(12): warning C4013: 'Init_Winsock' undefined; assuming extern returning int
+c:\users\ori\source\repos\cc\channel.c(46): warning C4244: '=': conversion from 'u_long' to 'USHORT', possible loss of data
+c:\users\ori\source\repos\cc\channel.c(63): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
+c:\users\ori\source\repos\cc\channel.c(63): warning C4024: 'inet_addr': different types for formal and actual parameter 1
+c:\users\ori\source\repos\cc\channel.c(68): warning C4047: 'function': 'char *' differs in levels of indirection from 'int'
+c:\users\ori\source\repos\cc\channel.c(68): warning C4024: 'recvfrom': different types for formal and actual parameter 2
+c:\users\ori\source\repos\cc\channel.c(80): warning C4133: 'function': incompatible types - from 'sockaddr_in *' to 'const sockaddr *'
+c:\users\ori\source\repos\cc\channel.c(40): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\channel.c(49): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\channel.c(56): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\channel.c(63): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock2.h(1831): note: see declaration of 'inet_addr'
+c:\users\ori\source\repos\cc\channel.c(82): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\channel.c(93): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\channel.c(96): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\channel.c(28): warning C4101: 'chnl_buff_2': unreferenced local variable
+c:\users\ori\source\repos\cc\channel.c(27): warning C4101: 'bytes_wrote': unreferenced local variable
+c:\users\ori\source\repos\cc\channel.c(30): warning C4101: 'recv_addr': unreferenced local variable
+c:\users\ori\source\repos\cc\channel.c(26): warning C4101: 'i': unreferenced local variable
+c:\users\ori\source\repos\cc\channel.c(25): warning C4101: 'r': unreferenced local variable
+c:\users\ori\source\repos\cc\channel.c(115): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   Receiver.c
+c:\users\ori\source\repos\cc\receiver.c(28): error C2143: syntax error: missing ')' before '{'
+c:\users\ori\source\repos\cc\receiver.c(18): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\receiver.c(26): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock2.h(1831): note: see declaration of 'inet_addr'
+c:\users\ori\source\repos\cc\receiver.c(29): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\receiver.c(33): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
   Sender.c
+c:\users\ori\source\repos\cc\sender.c(11): warning C4013: 'Init_Winsock' undefined; assuming extern returning int
+c:\users\ori\source\repos\cc\sender.c(28): warning C4013: 'get_file_size' undefined; assuming extern returning int
+c:\users\ori\source\repos\cc\sender.c(48): warning C4013: 'read' undefined; assuming extern returning int
+c:\users\ori\source\repos\cc\sender.c(54): warning C4013: 'compute_block' undefined; assuming extern returning int
+c:\users\ori\source\repos\cc\sender.c(61): warning C4133: 'function': incompatible types - from 'sockaddr_in *' to 'const sockaddr *'
+c:\users\ori\source\repos\cc\sender.c(24): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+c:\users\ori\source\repos\cc\sender.c(33): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\sender.c(41): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock2.h(1831): note: see declaration of 'inet_addr'
+c:\users\ori\source\repos\cc\sender.c(63): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\sender.c(72): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\sender.c(75): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(182): note: see declaration of 'strerror'
+c:\users\ori\source\repos\cc\sender.c(13): warning C4101: 's_c_buff_2': unreferenced local variable
+c:\users\ori\source\repos\cc\sender.c(83): error C2371: 'Init_Winsock': redefinition; different basic types
+c:\users\ori\source\repos\cc\sender.c(103): error C2371: 'compute_block': redefinition; different basic types
+c:\users\ori\source\repos\cc\sender.c(115): warning C4013: 'pow' undefined; assuming extern returning int
   Generating Code...
-  CC-hw1.vcxproj -> C:\Users\Ori\source\repos\CC\Debug\CC-hw1.exe
+c:\users\ori\source\repos\cc\channel.c(33): warning C4700: uninitialized local variable 'sockets_set' used
